@@ -30,7 +30,7 @@ const renderOpts = {
 
 const pagesManifestData = fs.readFileSync('.next/server/pages-manifest.json', 'utf8');
 const pagesManifest = JSON.parse(pagesManifestData);
-const defaultPathMap = Object.keys(pagesManifest).reduce(function(acc, page) {
+const defaultPathMap = Object.keys(pagesManifest).reduce((acc, page) => {
     switch (page) {
         case '/_document':
         case '/_app':
@@ -42,7 +42,7 @@ const defaultPathMap = Object.keys(pagesManifest).reduce(function(acc, page) {
 }, {});
 
 if (typeof config.exportPathMap !== 'function') {
-    config.exportPathMap = async function(defaultMap) {
+    config.exportPathMap = async (defaultMap) => {
         return defaultMap;
     };
 }
@@ -99,12 +99,12 @@ const states = {
     INBUF: 1,
 };
 
-const server = net.createServer(function(socket) {
+const server = net.createServer((socket) => {
     socket.setKeepAlive(false);
     let state = states.INLEN;
     let buf = Buffer.alloc(0);
     let inlen = 0;
-    const processBuf = async function() {
+    const processBuf = async () => {
         try {
             while (true) {
                 switch (state) {
@@ -142,7 +142,7 @@ const server = net.createServer(function(socket) {
             socket.destroy();
         }
     }
-    socket.on('data', async function(b) {
+    socket.on('data', async (b) => {
         buf = Buffer.concat([buf, b]);
         await processBuf();
     });
