@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "fs-extra": "^7.0.1",
+    "next": "^8.0.3",
+    "next-routes": "^1.4.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "tmp": "^0.0.33"
+  },
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "export": "rm -rf .next out && next build && node export all",
+    "export-server": "node export"
+  }
+}
